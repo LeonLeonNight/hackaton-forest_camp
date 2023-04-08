@@ -1,18 +1,17 @@
 import os
 
-from app.application import create_app, db, migrate
-from app import blueprint
+from flask_migrate import Migrate
 
+from app import blueprint
+from app.myapp import create_app, db
 
 env = str('dev') #os.getenv('BOILERPLATE_ENV') or 
 app = create_app(env)
-app.register_blueprint(blueprint)
-
 app.app_context().push()
 
-db.create_all() #created
+#app.register_blueprint(blueprint)
 
-migrate.init_app(app, db)
+#db.create_all() #created
 
 if __name__ == "__main__": 
     app.run(debug=True)

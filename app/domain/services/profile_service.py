@@ -1,6 +1,6 @@
 import uuid
 import datetime
-from app.application import db
+from app.myapp import db
 from app.domain.entity.profile import Profile
 
 
