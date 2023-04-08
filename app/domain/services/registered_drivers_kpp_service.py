@@ -1,6 +1,4 @@
-import select
-import uuid
-import datetime
+from sqlalchemy import desc
 from app.myapp import db
 from app.domain.entity.registered_drivers_kpp import Registered_drivers_kpp
 from app.domain.entity.client import Client
@@ -9,7 +7,7 @@ from app.domain.entity.goods import Goods
 
 
 def get_all_registered_drivers_kpps():
-    return (Registered_drivers_kpp.query.orderby(Registered_drivers_kpp.id.desc()).all())
+    return Registered_drivers_kpp.query.order_by(desc(Registered_drivers_kpp.id)).all()
 
 
 # def create_profile(data):
