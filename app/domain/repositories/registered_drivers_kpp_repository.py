@@ -11,11 +11,9 @@ class Registered_drivers_kppRepository(ABC):
 
     @abstractmethod
     def get_all_registered_drivers_kpps(self,
-                    Registered_drivers_kpp_type: str,
-                    Registered_drivers_kpp_id: uuid) -> Registered_drivers_kpp:
+                    Registered_drivers_kpp_id: int) -> Registered_drivers_kpp:
         registered_drivers_kpp = next((x for x in self._Registered_drivers_kpps
                         if x.id == Registered_drivers_kpp_id
-                        and x.Registered_drivers_kpp_type == Registered_drivers_kpp_type
                         ),None)
         return registered_drivers_kpp
     

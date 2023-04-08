@@ -1,7 +1,7 @@
 import select
 import uuid
 import datetime
-from app.application import db
+from app.myapp import db
 from app.domain.entity.registered_drivers_kpp import Registered_drivers_kpp
 from app.domain.entity.client import Client
 from app.domain.entity.kpp import Kpp

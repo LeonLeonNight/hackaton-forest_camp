@@ -1,6 +1,5 @@
 from flask_restx import Namespace, fields
-from app.application import db
-
+from app.myapp import db
 
 
 class Registered_drivers_kppDto:
@@ -9,4 +8,5 @@ class Registered_drivers_kppDto:
         'id': fields.Integer(required=True),
         'pass_number': fields.String(required=True),
         'auto_number': fields.String(required=False),
+        'status':fields.String(required=False)
     })
