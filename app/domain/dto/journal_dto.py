@@ -12,5 +12,5 @@ class JournalDto:
         'client_name': fields.String(required=False),
         'goods_name' : fields.String(required=False),
         'count': fields.Float(required=True),
-        # 'measurement_system_type': fields.String(required=False),
+        'measurement_system_type': fields.String(required=False),
     })

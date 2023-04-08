@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 import uuid, attr
 from app.domain.exception import JournalNotFound
-from app.domain.entity.journal import (Journal, ExtraJournal, BasicJournal)
+from app.domain.entity.journal import (Journal)
 
 
 @attr.s(auto_attribs=True)
@@ -10,14 +10,14 @@ class JournalRepository(ABC):
     _Journals:List[Journal]
 
     @abstractmethod
-    def get_Journal(self,
-                    Journal_type: str, 
+    def get_all_journals(self,
+                    Journal_type: str,
                     Journal_id: uuid) -> Journal:
-        Journal = next((x for x in self._Journals 
-                        if x.id == Journal_id 
+        journal = next((x for x in self._Journals
+                        if x.id == Journal_id
                         and x.Journal_type == Journal_type
                         ),None)
-        return Journal
+        return journal
     
     
     # @abstractmethod

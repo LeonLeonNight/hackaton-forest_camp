@@ -2,9 +2,7 @@ from flask import request
 from flask_restx import Resource
 
 from app.domain.dto.journal_dto import JournalDto
-from app.domain.services.journal_service import (
-    get_all_journals, create_journal, get_journal
-)
+from app.domain.services.journal_service import (get_all_journals)
 
 
 api = JournalDto.api

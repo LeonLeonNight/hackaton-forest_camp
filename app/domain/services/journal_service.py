@@ -8,7 +8,7 @@ from app.domain.entity.kpp import Kpp
 from app.domain.entity.goods import Goods
 
 
-def get_all_profiles():
+def get_all_journals():
     return (
             Journal.query(Client, Kpp, Goods)
             .join(Client)
