@@ -1,21 +1,22 @@
 import select
 import uuid
 import datetime
-from app.application import db
+from app.myapp import db
 from app.domain.entity.journal import Journal
 from app.domain.entity.client import Client
 from app.domain.entity.kpp import Kpp
 from app.domain.entity.goods import Goods
+from app.domain.entity.measurement_system_type import MeasurementSystemType
 
 
 def get_all_journals():
-    return (
-            Journal.query(Client, Kpp, Goods)
-            .join(Client)
-            .join(Kpp)
-            .join(Goods)
+    return Journal.query\
+            .join(Client, Journal.client_id == Client.id)\
+            .join(Kpp, Journal.kpp_id == Kpp.id)\
+            .join(Goods, Journal.goods_id == Goods.id)\
+            .join(MeasurementSystemType, Journal.measurement_system_type_id == MeasurementSystemType.id)\
             .all()
-        )
+        
 
 
 # def create_profile(data):

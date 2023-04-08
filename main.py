@@ -9,9 +9,9 @@ env = str('dev') #os.getenv('BOILERPLATE_ENV') or
 app = create_app(env)
 app.app_context().push()
 
-#app.register_blueprint(blueprint)
+app.register_blueprint(blueprint)
 
-#db.create_all() #created
+db.create_all() #created
 
 if __name__ == "__main__": 
     app.run(debug=True)
