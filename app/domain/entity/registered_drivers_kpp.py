@@ -10,4 +10,4 @@ class Registered_drivers_kpp(db.Model):
     status = db.Column(db.Integer, unique=False, nullable=True)
     
     def __repr__(self):
-        return "<Registered_drivers_kpp '{}'>".format(self.profile_name)
+        return "<Registered_drivers_kpp '{}'>".format(self.registered_drivers_kpp_name)
