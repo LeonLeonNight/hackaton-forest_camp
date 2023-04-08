@@ -124,3 +124,23 @@ dmypy.json
 .idea/modules.xml
 .idea/pyRESTservice_flusk.iml
 .idea/vcs.xml
+
+# ---front---
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# misc
+.DS_Store
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# IDE
+/.idea
+
+#archives
+*.zip

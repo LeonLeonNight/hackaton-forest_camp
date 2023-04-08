@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="header__nav">
+                <a href="/" class="header__link">Зарегистрированные машины</a>
+                <a href="/queue.html" class="header__link">Очередь на стоянку</a>
+                <a href="/loadingQueue.html" class="header__link">Очередь на загрузку</a>
+                <a href="/tovars.html" class="header__link">Товары на складе</a>
+                <a href="/auth.html" class="header__link">Регистраия машины</a>
+                <a href="/loading.html" class="header__link">Загрузка</a>
+            </nav>
+        </div>
+    </header>
+    <div class="main">
+        <div class="container">
+            <form id="cars-arrived" method="post" class="main__form">
+                <table border="collapse" class="main__table">
+                    <tr class="main__tr table-heading">
+                        <th class="main__th">Номер пропуска</th>
+                        <th class="main__th">Номер авто</th>
+                        <th class="main__th">ФИО</th>
+                        <th class="main__th">Наим. отправителя</th>
+                        <th class="main__th">Вид продукции</th>
+                        <th class="main__th">Объём продукции</th>
+                        <th class="main__th">ЕИ</th>
+                        <th class="main__th">Пропустить?</th>
+                    </tr>
+                </table>
+                <img src="../../images/loading.gif" alt="loading" class="main__loading">
+                <button name="submit" type="submit" class="main__btn main-btn">Сохранить</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
