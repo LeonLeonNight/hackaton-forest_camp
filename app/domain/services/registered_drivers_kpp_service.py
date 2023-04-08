@@ -1,9 +1,6 @@
 from sqlalchemy import desc
 from app.myapp import db
 from app.domain.entity.registered_drivers_kpp import Registered_drivers_kpp
-from app.domain.entity.client import Client
-from app.domain.entity.kpp import Kpp
-from app.domain.entity.goods import Goods
 
 
 def get_all_registered_drivers_kpps():

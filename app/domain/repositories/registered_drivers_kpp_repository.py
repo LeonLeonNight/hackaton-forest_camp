@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List
-import uuid, attr
+import attr
 from app.domain.exception import Registered_drivers_kppNotFound
 from app.domain.entity.registered_drivers_kpp import (Registered_drivers_kpp)
 
@@ -10,8 +10,7 @@ class Registered_drivers_kppRepository(ABC):
     _Registered_drivers_kpps:List[Registered_drivers_kpp]
 
     @abstractmethod
-    def get_all_registered_drivers_kpps(self,
-                    Registered_drivers_kpp_id: int) -> Registered_drivers_kpp:
+    def get_all_registered_drivers_kpps(self, Registered_drivers_kpp_id: int) -> Registered_drivers_kpp:
         registered_drivers_kpp = next((x for x in self._Registered_drivers_kpps
                         if x.id == Registered_drivers_kpp_id
                         ),None)
