@@ -1,7 +1,6 @@
-from app.application import db
+from app.myapp import db
 
 class Journal(db.Model):
-
     __tablename__ = "journal"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)

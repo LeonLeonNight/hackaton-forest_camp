@@ -11,11 +11,9 @@ class JournalRepository(ABC):
 
     @abstractmethod
     def get_all_journals(self,
-                    Journal_type: str,
-                    Journal_id: uuid) -> Journal:
+                    Journal_id: int) -> Journal:
         journal = next((x for x in self._Journals
                         if x.id == Journal_id
-                        and x.Journal_type == Journal_type
                         ),None)
         return journal
     

@@ -1,6 +1,5 @@
 from flask_restx import Namespace, fields
-from app.application import db
-
+from app.myapp import db
 
 
 class JournalDto:

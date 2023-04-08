@@ -1,4 +1,4 @@
-from app.application import db, flask_bcrypt
+from app.myapp import db, flask_bcrypt
 
 class Profile(db.Model):
     """ Profile Model for storing profile related details """
