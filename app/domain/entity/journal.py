@@ -12,7 +12,7 @@ class Journal(db.Model):
     kpp_id = db.Column(db.Integer, db.ForeignKey('kpp.id'))
     goods_id = db.Column(db.Integer, db.ForeignKey('goods.id'))
     count = db.Column(db.Float, nullable=True, default=False)
-    measurement_system_type_id = db.Column(db.Integer, nullable=True, default=False)
+    measurement_system_type_id = db.Column(db.Integer, db.ForeignKey('measurement_system_type.id'))
 
     def __repr__(self):
         return "<Journal '{}'>".format(self.name)    
