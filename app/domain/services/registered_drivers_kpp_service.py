@@ -19,7 +19,7 @@ def delete_registered_drivers_kpp(driver_id):
     }
     return response_object, 201
 
-def create_driver(data):
+def create_registered_drivers_kpp(data):
     driver = Registered_drivers_kpp.query.filter_by(pass_number=data['pass_number']).first()
     if not driver:
         new_driver = Registered_drivers_kpp(
