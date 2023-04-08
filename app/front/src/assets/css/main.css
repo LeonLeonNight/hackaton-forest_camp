@@ -61,6 +61,11 @@
     /* display: grid;
     grid-template-columns: repeat(3, 1fr); */
 }
+.main__table.collapse > tbody > tr > *:nth-child(1),
+.main__table.collapse > tbody > tr > *:nth-child(3),
+.main__table.collapse > tbody > tr > *:nth-child(4) {
+    display: none;
+}
 
 .main__td {
     text-align: center;
@@ -71,6 +76,21 @@
 }
 .main__checkbox:hover {
     cursor: pointer;
+}
+
+.main__label + label {
+    margin-left: 5px;
+}
+
+.main__btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+}
+
+.main__btn-wrapper > button {
+    margin: 0;
 }
 
 .main__btn {
@@ -101,11 +121,13 @@
 }
 
 div#prez-1,
-div#prez-2 {
+div#prez-2,
+div#prez-3 {
     display: none;
 }
 
 #prez-1:target,
-#prez-2:target {
+#prez-2:target,
+#prez-3:target {
     display: block;
 }

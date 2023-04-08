@@ -9,17 +9,14 @@
 <body>
     <header class="header">
         <div class="container">
+            <!-- <h2 class="header__title">Загрузка</h2> -->
             <nav class="header__nav">
-                <a href="/" class="header__link">Зарегистрированные машины</a>
-                <a href="/queue.html" class="header__link">Очередь на стоянку</a>
-                <a href="/loadingQueue.html" class="header__link">Очередь на загрузку</a>
-                <a href="/tovars.html" class="header__link">Товары на складе</a>
-                <a href="/auth.html" class="header__link">Регистраия машины</a>
-                <a href="/loading.html" class="header__link">Загрузка</a>
+                <a href="#prez-1" class="header__link">Список машин на КПП</a>
+                <a href="#prez-2" class="header__link">Список на внутренней стоянке</a>
             </nav>
         </div>
     </header>
-    <div class="main">
+    <div id="prez-1" class="main">
         <div class="container">
             <form id="cars-arrived" method="post" class="main__form">
                 <table border="collapse" class="main__table">
@@ -35,7 +32,33 @@
                     </tr>
                 </table>
                 <img src="../../images/loading.gif" alt="loading" class="main__loading">
-                <button name="submit" type="submit" class="main__btn main-btn">Сохранить</button>
+                <div class="main__btn-wrapper">
+                    <button name="submit" type="submit" class="main__btn main-btn">Сохранить</button>
+                    <button type="button" class="main__btn hide-btn" data-toggle-data>Скрыть/показать данные</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="prez-2" class="main">
+        <div class="container">
+            <form id="cars-inside" method="post" class="main__form">
+                <table border="collapse" class="main__table">
+                    <tr class="main__tr table-heading">
+                        <th class="main__th">Номер пропуска</th>
+                        <th class="main__th">Номер авто</th>
+                        <th class="main__th">ФИО</th>
+                        <th class="main__th">Наим. отправителя</th>
+                        <th class="main__th">Вид продукции</th>
+                        <th class="main__th">Объём продукции</th>
+                        <th class="main__th">ЕИ</th>
+                        <th class="main__th">Ворота</th>
+                    </tr>
+                </table>
+                <img src="../../images/loading.gif" alt="loading" class="main__loading">
+                <div class="main__btn-wrapper">
+                    <button name="submit" type="submit" class="main__btn main-btn">Сохранить</button>
+                    <button type="button" class="main__btn hide-btn" data-toggle-data>Скрыть/показать данные</button>
+                </div>
             </form>
         </div>
     </div>
