@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистраия машины</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="header__nav">
+                <a href="#prez-1" class="header__link">Регистрация машины</a>
+                <a href="#prez-2" class="header__link">Удаление машины</a>
+                <a href="#prez-3" class="header__link">Общий список</a>
+            </nav>
+        </div>
+    </header>
+    <div id="prez-1" class="auth-form">
+        <div class="container">
+            <form id="auth" method="post" class="auth-form__form">
+                <input class="auth-form__input" type="text" name="talonId" placeholder="Номер пропуска">
+                <button name="submit" type="submit" class="auth-form__btn main-btn">Зарегистрировать</button>
+            </form>
+        </div>
+    </div>
+    <div id="prez-2" class="auth-form">
+        <div class="container">
+            <form id="del" method="post" class="auth-form__form">
+                <input class="auth-form__input" type="text" name="talonId" placeholder="Номер пропуска">
+                <button name="submit" type="submit" class="auth-form__btn main-btn">Удалить</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
