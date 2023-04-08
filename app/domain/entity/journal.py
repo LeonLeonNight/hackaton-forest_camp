@@ -3,7 +3,7 @@ from app.myapp import db
 class Journal(db.Model):
     __tablename__ = "journal"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     pass_number = db.Column(db.String(15),unique=True, nullable=False)
     auto_number = db.Column(db.String(15), unique=False, nullable=True)
     driver = db.Column(db.String(255), unique=False, nullable=True)
