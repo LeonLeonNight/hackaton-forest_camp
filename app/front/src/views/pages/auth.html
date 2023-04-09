@@ -8,33 +8,37 @@
 </head>
 <body>
     <header class="header">
+        <h1>КПП</h1>
         <div class="container">
             <nav class="header__nav">
-                <a href="#prez-1" class="header__link">Регистрация машины</a>
-                <a href="#prez-2" class="header__link">Удаление машины</a>
-                <a href="#prez-3" class="header__link">Общий список</a>
+                <a href="#prez-1" class="header__link">Регистрация машины в очереди</a>
+                <a href="#prez-2" class="header__link">Удаление машины в очереди</a>
+                <a href="#prez-3" class="header__link">Общий список очереди</a>
             </nav>
         </div>
     </header>
     <div id="prez-1" class="auth-form">
         <div class="container">
             <form id="auth" method="post" class="auth-form__form">
+                <h2>Регистрация машины в общей очереди</h2>
                 <input class="auth-form__input" type="text" name="talonId" placeholder="Номер пропуска">
-                <button name="submit" type="submit" class="auth-form__btn main-btn">Зарегистрировать</button>
+                <button name="submit" type="submit" class="auth-form__btn main-btn">Зарегистрировать авто</button>
             </form>
         </div>
     </div>
     <div id="prez-2" class="auth-form">
         <div class="container">
             <form id="del" method="post" class="auth-form__form">
+                <h2>Удаление машины из общей очереди</h2>
                 <input class="auth-form__input" type="text" name="talonId" placeholder="Номер пропуска">
-                <button name="submit" type="submit" class="auth-form__btn main-btn">Удалить</button>
+                <button name="submit" type="submit" class="auth-form__btn main-btn">Удалить авто</button>
             </form>
         </div>
     </div>
     <div id="prez-3" class="main">
         <div class="container">
             <form id="cars-kpp" method="post" class="main__form">
+                <h2>Список машин в общей очереди</h2>
                 <table border="collapse" class="main__table">
                     <tr class="main__tr table-heading">
                         <th class="main__th">Номер пропуска</th>
@@ -44,10 +48,10 @@
                         <th class="main__th">Вид продукции</th>
                         <th class="main__th">Объём продукции</th>
                         <th class="main__th">ЕИ</th>
+                        <th class="main__th">Состояние</th>
                     </tr>
                 </table>
                 <img src="../../images/loading.gif" alt="loading" class="main__loading">
-                <button name="submit" type="submit" class="main__btn main-btn">Сохранить</button>
             </form>
         </div>
     </div>
