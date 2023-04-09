@@ -30,9 +30,13 @@
     font-size: 16px;
     line-height: 22px;
     font-weight: 500;
+    padding: 15px
 }
 .header__link:hover {
-
+    cursor: pointer;
+    border: 1px solid orange;
+    border-radius: 5px;
+    padding: 13px;
 }
 
 .main {
@@ -61,9 +65,12 @@
     /* display: grid;
     grid-template-columns: repeat(3, 1fr); */
 }
-.main__table.collapse > tbody > tr > *:nth-child(1),
+
 .main__table.collapse > tbody > tr > *:nth-child(3),
-.main__table.collapse > tbody > tr > *:nth-child(4) {
+.main__table.collapse > tbody > tr > *:nth-child(4),
+ .main__table.collapse > tbody > tr > *:nth-child(5),
+ .main__table.collapse > tbody > tr > *:nth-child(6),
+ .main__table.collapse > tbody > tr > *:nth-child(7){
     display: none;
 }
 
@@ -130,4 +137,49 @@ div#prez-3 {
 #prez-2:target,
 #prez-3:target {
     display: block;
+}
+
+/*
+/ Внешка чутка допилина
+*/
+h1, h2 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+h2 {
+    margin-bottom: 25px;
+}
+
+.header__nav {
+    gap: 0;
+
+}
+
+.header__link {
+    border-right: 1px solid orange;
+    width: 100%;
+    text-align:center;
+}
+.header__link:first-child {
+    border-left: 1px solid orange;
+}
+
+.header__link.active {
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 13px;
+}
+
+.main__btn,
+.main-btn {
+    border-radius: 10px;
+    width: 290px;
+}
+
+.auth-form__form{
+    align-items: center;
 }
