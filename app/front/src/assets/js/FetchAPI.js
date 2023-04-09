@@ -14,18 +14,19 @@ const data = {
 }
 
 class FetchAPIClass {
-  /* getData = (url, request) => {
-    return axios
-      .get(url, {
-        params: { request },
-      })
-      .then((response) => response.data);
-  }; */
   getData = (url, request) => {
+    return axios
+      .post('/swagger-ui'+url, {
+        request,
+      })
+      .then((response) => response.data)
+      .catch((e) => console.log('Get API '+e));
+  };
+  /* getData = (url, request) => {
     return new Promise((res, rej) => {
         setTimeout(() => res(data), 1000);
     })
-  }
+  } */
 }
 
 export const FetchAPI = new FetchAPIClass();

@@ -1,5 +1,5 @@
 import { FetchAPI } from "./FetchAPI";
-import { ARRIVED_CARS_URL, STAY_CARS_URL, LOAD_CARS_URL, LOAD_AUTH_CARS_URL, LOAD_DEL_CARS_URL, fetchInterval, intervals, prevData } from "./constants";
+import { ARRIVED_CARS_URL, STAY_CARS_URL, LOAD_CARS_URL, LOAD_AUTH_CARS_URL, LOAD_DEL_CARS_URL, INSIDE_CARS_URL, KPP_CARS_URL, fetchInterval, intervals, prevData } from "./constants";
 import { isEqual } from "lodash";
 
 export default function() {
@@ -19,6 +19,20 @@ export default function() {
         return check;
     }
 
+    const createRadio = (classRadio, classLabel, name, text, clickFn, formId = null) => {
+        const radio = document.createElement('input');
+        const label = document.createElement('label');
+        radio.type = 'radio';
+        radio.name = name;
+        radio.classList.add(...classRadio);
+        radio.addEventListener('click', clickFn);
+        label.classList.add(...classLabel);
+        label.innerHTML = text;
+        if(formId) radio.setAttribute('form', formId);
+        label.append(radio);
+        return label;
+    }
+
     const createTd = (classNames, text) => {
         const td = document.createElement('td');
         if(typeof text === 'string') {
@@ -26,6 +40,13 @@ export default function() {
         } else {
             td.append(text);
         }
+        td.classList.add(...classNames);
+        return td;
+    }
+
+    const createComplexTd = (classNames, elements) => {
+        const td = document.createElement('td');
+        td.append(...elements);
         td.classList.add(...classNames);
         return td;
     }
@@ -46,6 +67,18 @@ export default function() {
         }
     }
 
+    const deleteCheckedRadioState = (event) => {
+        const e = event.target;
+        const td = e.closest('td');
+        for(const input of td.querySelectorAll('input[type="radio"]')) {
+            if(input != e) input.oldChecked = false;
+        }
+        if(e?.oldChecked) {
+            e.checked = false;
+        }
+        e.oldChecked = e.checked;
+    }
+
     const setUpdateFetch = (form, url, intervalId, constData) => {
         if(!intervals[intervalId]) clearInterval(intervals[intervalId]);
         intervals[intervalId] = setInterval(() => {
@@ -57,6 +90,10 @@ export default function() {
     }
 
     const resetData = (form, data, checkData, tableName) => {
+        if(data === undefined) {
+            console.log(tableName+'data is undefined');
+            return;
+        }
         if(isEqual(data, prevData[checkData])) return;
         let table = form.querySelector('table > tbody');
         if(!table) table = form.querySelector('table');
@@ -65,6 +102,12 @@ export default function() {
                 setArrivedTable(table, data);
             case 'stayData':
                 setStayTable(table, data);
+            case 'loadData':
+                setLoadTable(table, data);
+            case 'insideData':
+                setInsideTable(table, data);
+            case 'kppData':
+                setKppTable(table, data);
             default:
                 console.log('unknown data table')
         }
@@ -74,6 +117,10 @@ export default function() {
     const arrivedForm = document.querySelector('#cars-arrived');
 
     const setArrivedTable = (table, data) => {
+        if(data === undefined) {
+            console.log('data is undefined')
+            return;
+        }
         clearTable(table);
         for(const item of data.propusk) {
             const checkbox = createCheckbox(['main__checkbox'], item.id);
@@ -105,6 +152,10 @@ export default function() {
         arrivedForm.classList.add('loading');
         loadData(ARRIVED_CARS_URL)
             .then((data) => {
+                if(data === undefined) {
+                    console.log('data is undefined')
+                    return;
+                }
                 prevData.arrivedData = data;
                 arrivedForm.classList.remove('loading');
                 let table = arrivedForm.querySelector('table > tbody');
@@ -119,6 +170,10 @@ export default function() {
     const stayForm = document.querySelector('#cars-stay');
 
     const setStayTable = (table, data) => {
+        if(data === undefined) {
+            console.log('data is undefined')
+            return;
+        }
         clearTable(table);
         for(const item of data.propusk) {
             const tr = createTr(['main__tr'], ['main__td'], Object.values(item));
@@ -148,6 +203,10 @@ export default function() {
         stayForm.classList.add('loading');
         loadData(STAY_CARS_URL)
             .then((data) => {
+                if(data === undefined) {
+                    console.log('data is undefined')
+                    return;
+                }
                 prevData.stayData = data;
                 stayForm.classList.remove('loading');
                 let table = stayForm.querySelector('table > tbody');
@@ -158,10 +217,68 @@ export default function() {
         setUpdateFetch(stayForm, STAY_CARS_URL, 'stayCarsInterval', 'stayData');
     }
 
+    // INSIDE_FORM
+    const insideForm = document.querySelector('#cars-inside');
+
+    const setInsideTable = (table, data) => {
+        if(data === undefined) {
+            console.log('data is undefined')
+            return;
+        }
+        clearTable(table);
+        for(const item of data.propusk) {
+            const radio1 = createRadio(['main__checkbox'], ['main__label'], item.id, 'Север', deleteCheckedRadioState);
+            const radio2 = createRadio(['main__checkbox'], ['main__label'], item.id, 'Юг', deleteCheckedRadioState);
+            const tr = createTr(['main__tr'], ['main__td'], Object.values(item));
+            tr.append(createComplexTd(['main__td'], [radio1, radio2]));
+            table.append(tr);
+        }
+    }
+
+    const handleInsideForm = async (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const submit = form.elements['submit'];
+        const formData = new FormData(form);
+        /* for(const input of form.elements) {
+            if(input.type === 'checkbox') formData.append(input.name, input.checked);
+        } */
+
+        submit.disabled = true;
+        loadData(INSIDE_CARS_URL, formData)
+            .then((resp) => {
+                resetData(form, resp, 'insideData');
+                submit.disabled = false;
+            })
+    }
+    
+    if(insideForm) {
+        insideForm.classList.add('loading');
+        loadData(INSIDE_CARS_URL)
+            .then((data) => {
+                if(data === undefined) {
+                    console.log('data is undefined')
+                    return;
+                }
+                prevData.insideData = data;
+                insideForm.classList.remove('loading');
+                let table = insideForm.querySelector('table > tbody');
+                if(!table) table = insideForm.querySelector('table');
+                setInsideTable(table, data);
+            });
+        insideForm.addEventListener('submit', handleInsideForm);
+        setUpdateFetch(insideForm, INSIDE_CARS_URL, 'insideCarsInterval', 'insideData');
+    }
+
     // LOAD_FORM
     const loadForm = document.querySelector('#cars-load');
 
     const setLoadTable = (table, data) => {
+        if(data === undefined) {
+            console.log('data is undefined')
+            return;
+        }
         clearTable(table);
         for(const item of data.propusk) {
             const tr = createTr(['main__tr'], ['main__td'], Object.values(item));
@@ -191,6 +308,10 @@ export default function() {
         loadForm.classList.add('loading');
         loadData(LOAD_CARS_URL)
             .then((data) => {
+                if(data === undefined) {
+                    console.log('data is undefined')
+                    return;
+                }
                 prevData.loadData = data;
                 loadForm.classList.remove('loading');
                 let table = loadForm.querySelector('table > tbody');
@@ -209,15 +330,14 @@ export default function() {
 
         const form = event.target;
         const submit = form.elements['submit'];
-        const formData = new FormData(form);
-        /* for(const input of form.elements) {
-            if(input.type === 'checkbox') formData.append(input.name, input.checked);
-        } */
+        const formData = new FormData();
+
+        formData.append('pass_number', form.talonId)
 
         submit.disabled = true;
         loadData(LOAD_AUTH_CARS_URL, formData)
             .then((resp) => {
-                resetData(form, resp, 'loadData', 'loadData');
+                //resetData(form, resp, 'loadData', 'loadData');
                 submit.disabled = false;
             })
     }
@@ -235,19 +355,79 @@ export default function() {
         const form = event.target;
         const submit = form.elements['submit'];
         const formData = new FormData(form);
-        /* for(const input of form.elements) {
-            if(input.type === 'checkbox') formData.append(input.name, input.checked);
-        } */
 
         submit.disabled = true;
         loadData(LOAD_DEL_CARS_URL, formData)
             .then((resp) => {
-                resetData(form, resp, 'loadData', 'loadData');
+                //resetData(form, resp, 'loadData', 'loadData');
                 submit.disabled = false;
             })
     }
 
     if(delForm) {
         delForm.addEventListener('submit', handleDelForm)
+    }
+
+    // KPP_FORM
+    const kppForm = document.querySelector('#cars-kpp');
+
+    const setKppTable = (table, data) => {
+        clearTable(table);
+        for(const item of data.propusk) {
+            const tr = createTr(['main__tr'], ['main__td'], Object.values(item));
+            table.append(tr);
+        }
+    }
+
+    const handleKppForm = async (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const submit = form.elements['submit'];
+        const formData = new FormData(form);
+        /* for(const input of form.elements) {
+            if(input.type === 'checkbox') formData.append(input.name, input.checked);
+        } */
+
+        submit.disabled = true;
+        loadData(KPP_CARS_URL, formData)
+            .then((resp) => {
+                if(reps === undefined) {
+                    console.log('data is undefined')
+                    return;
+                }
+                resetData(form, resp, 'kppData', 'kppData');
+                submit.disabled = false;
+            })
+    }
+    
+    if(kppForm) {
+        kppForm.classList.add('loading');
+        loadData(KPP_CARS_URL)
+            .then((data) => {
+                if(data === undefined) {
+                    console.log('data is undefined')
+                    return;
+                }
+                prevData.kppData = data;
+                kppForm.classList.remove('loading');
+                let table = kppForm.querySelector('table > tbody');
+                if(!table) table = kppForm.querySelector('table');
+                setKppTable(table, data);
+            });
+            kppForm.addEventListener('submit', handleKppForm);
+        setUpdateFetch(kppForm, KPP_CARS_URL, 'loadKppInterval', 'kppData');
+    }
+
+    const toggleBtns = document.querySelectorAll('*[data-toggle-data');
+
+    const hideOrShowData = (event) => {
+        event.target.closest('form').querySelector('table').classList.toggle('collapse');
+    }
+
+    if(toggleBtns.length) {
+        for(const btn of toggleBtns) {
+            btn.addEventListener('click', hideOrShowData);
+        }
     }
 }

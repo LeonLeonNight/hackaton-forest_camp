@@ -10,7 +10,10 @@ const devWebpackConfig = merge(BasicPart, {
         open: true,
         compress: true,
         watchFiles: dirs.src,
-        port: 8081
+        port: 8081,
+        proxy: {
+            '/swagger-ui':'http://127.0.0.1:5000/',
+        }
     }
 })
 

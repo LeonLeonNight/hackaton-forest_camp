@@ -4,7 +4,7 @@ import psycopg2
 POSTGRES_URL="127.0.0.1:5432"
 POSTGRES_USER="postgres"
 POSTGRES_PW="1"
-POSTGRES_DB="zint"
+POSTGRES_DB="zinc"
 DB_URL = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=POSTGRES_USER,pw=POSTGRES_PW,url=POSTGRES_URL,db=POSTGRES_DB)
 #con_str =str("host='localhost' dbname='zint' user='postgres' password='1'")
 
